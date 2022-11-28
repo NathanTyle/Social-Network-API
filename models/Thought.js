@@ -32,9 +32,4 @@ thoughtSchema.virtual('reactionCount').get(function() {
 
 const Thoughts = model('Thoughts', thoughtSchema);
 
-// Array of nested documents created with the reactionSchema
-// Schema Settings
-
-// Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
-
 module.exports = Thoughts;
