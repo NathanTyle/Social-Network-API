@@ -17,14 +17,14 @@ const thoughtSchema = new Schema(
             required: true,
         },
         reactions: [reactionSchema],
+    },
+    {
+        toJSON: {
+            getters: true,
+        },
+        id: false,
     }
 )
-
-// username (The user that created this thought)
-
-// String
-// Required
-// reactions (These are like replies)
 
 // Array of nested documents created with the reactionSchema
 // Schema Settings
