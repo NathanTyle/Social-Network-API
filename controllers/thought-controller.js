@@ -52,7 +52,7 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
 
-    addReaction({ params, body }, res) {
+    createReaction({ params, body }, res) {
         Thought.findOneAndUpdate(
             { _id: params.thoughtId },
             { $addToSet: { reactions: body }},
@@ -65,8 +65,19 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
 
-    
-}
+    deleteReaction({ params, body }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $pull: { reactions: { reactionId: body.reactionId }}},
+            { runValidators: true, new: true }
+        )
+        .then(thought =>
+            !thought
+            ? res.status(404).json({ message: 'Sorry but there is no Thought with this ID'})
+            : res.json(thought))
+            .catch((err) => res.status(500).json(err));
+    }
+};
 
 // WHEN I open API GET routes in Insomnia for users and thoughts
 
