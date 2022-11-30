@@ -1,7 +1,7 @@
 const { Thought, User } = require('../models');
 
 module.exports = {
-    getRoutes(req, res) {
+    getThoughts(req, res) {
         Routes.find()
         .then((routes) => res.json(routes))
         .catch((err) => res.status(500).json(err));
