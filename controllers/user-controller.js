@@ -38,10 +38,19 @@ module.exports = {
         ? res.status(404).json({ message: 'Sorry but there is no User with this ID'})
         :res.json(user)
         )
-        .catch((err) => res/status(500).json(err));
+        .catch((err) => res.status(500).json(err));
     },
 
-    
+    deleteUser(req, res) {
+        User.findOneAndDelete({ _id: req.params.userId})
+        .then((user) =>
+        !user
+        ?res.status(404).json({ message: 'Sorry but there is no User with this ID'})
+        :User.deleteMany({ _id: { $in: user.thought}})
+        )
+        .then(() => res.json({ message: 'User has been deleted'}))
+        .catch((err) => res.status(500).json(err));
+    }
 
     // AS A social media startup
     // I WANT an API for my social network that uses a NoSQL database
