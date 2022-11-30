@@ -50,7 +50,22 @@ module.exports = {
         )
         .then(() => res.json({ message: 'User has been deleted'}))
         .catch((err) => res.status(500).json(err));
-    }
+    },
+
+    createFriend({ params, body }, res) {
+        User.findOneAndUpdate(
+            { _id: params.userId },
+            { $push: {friends: params.friendId}},
+            { runValidators: true, new: true}
+        )
+        .then((user) =>
+        !user
+        ?res.status(404).json({ message: 'Sorry but there is no User with this ID'})
+        : res.json(user))
+        .catch((err) => res.status(500).json(err));
+    },
+
+    
 
     // AS A social media startup
     // I WANT an API for my social network that uses a NoSQL database
