@@ -11,3 +11,4 @@ const {
 
 router.route('/').get(getRoutes).post(createThought);
 
+router.route('/:thoughtId').get(getSingleThought).put(updateThought).delete(deleteThought);
