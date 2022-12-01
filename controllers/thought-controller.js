@@ -2,8 +2,8 @@ const { Thought, User } = require('../models');
 
 module.exports = {
     getThoughts(req, res) {
-        Routes.find()
-        .then((routes) => res.json(routes))
+        Thought.find()
+        .then((thoughts) => res.json(thoughts))
         .catch((err) => res.status(500).json(err));
     },
     

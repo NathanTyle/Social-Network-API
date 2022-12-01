@@ -52,7 +52,7 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
 
-    createFriend({ params, body }, res) {
+    createFriend({ params }, res) {
         User.findOneAndUpdate(
             { _id: params.userId },
             { $push: {friends: params.friendId}},
@@ -65,7 +65,7 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
 
-    deleteFriend({ params, body }, res) {
+    deleteFriend({ params }, res) {
         User.findOneAndUpdate(
             { _id: params.userId},
             { $pull: { friends: { friendId: body.friendId}}},
